@@ -7,14 +7,16 @@ function Logout() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:8000/api/v1/users/logout', {}, {
+    axios.post('https://crypto-verse-server.vercel.app/api/v1/users/logout', {}, {
       withCredentials: true
     })
     .then(response => {
       console.log(response.data)
-      navigate('/login');
     })
     .catch(error => console.error('Error Logging-Out: ', error))
+    .finally(() => {
+      navigate('/login');
+    })
   }
 
   return (

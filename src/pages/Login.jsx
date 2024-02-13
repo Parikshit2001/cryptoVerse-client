@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 function Login() {
@@ -7,9 +7,22 @@ function Login() {
   const [password, setPassword] = useState('')
   const navigate = useNavigate();
 
+  useEffect(() => {
+    axios.post(`${'https://crypto-verse-server.vercel.app'}`, {
+      username: "worf",
+      email: "emailworf",
+      password: "12345678"
+    }, {withCredentials: true})
+    .then(response => {
+      console.log(response)
+    })
+    .catch(error => console.error("Error occured : ", error))
+    .finally(() => console.log("checked vercel server"))
+  }, [])
+
   const onSubmit = (e) => {
     e.preventDefault()
-    axios.post('http://localhost:8000/api/v1/users/login', {
+    axios.post(`${'https://crypto-verse-server.vercel.app'}/api/v1/users/login`, {
       username,
       email: username,
       password

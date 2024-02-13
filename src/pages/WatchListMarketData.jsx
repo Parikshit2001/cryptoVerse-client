@@ -22,7 +22,7 @@ function WatchListMarketData() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/v1/users/watchlist', {
+    axios.get(`${'https://crypto-verse-server.vercel.app'}/api/v1/users/watchlist`, {
       withCredentials: true
     })
     .then(response => {
@@ -38,7 +38,7 @@ function WatchListMarketData() {
 
   const handleRemove = (coinId) => {
     console.log(coinId)
-    axios.post('http://localhost:8000/api/v1/users/remove-from-watchlist', {
+    axios.post(`${'https://crypto-verse-server.vercel.app'}/api/v1/users/remove-from-watchlist`, {
       coinId
     }, {
       withCredentials: true

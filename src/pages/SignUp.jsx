@@ -10,24 +10,24 @@ function SignUp() {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    axios.post('http://localhost:8000/api/v1/users/register', {
+    axios.post(`${'https://crypto-verse-server.vercel.app'}/api/v1/users/register`, {
       username,
       email,
       password
     })
     .then(response => {
       console.log("Response: ", response);
-    })
-    .then(() => {
-      axios.post('http://localhost:8000/api/v1/users/login', {
-      username,
-      email: username,
-      password
+      return axios.post(`${'https://crypto-verse-server.vercel.app'}/api/v1/users/login`, {
+        username,
+        email: username,
+        password
+      }, {
+        withCredentials: true
+      })
     })
     .then(data => {
       console.log(data);
       navigate('/');
-    })
     })
     .catch(error => {
       console.error("Error: ", error)

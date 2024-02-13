@@ -7,6 +7,7 @@ function App() {
   return (
     <div className='flex flex-col items-center bg-blue-100 min-h-screen'>
       <Header />
+      
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/login' element={<Login />} />

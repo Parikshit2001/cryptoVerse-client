@@ -6,7 +6,8 @@ function AddToWatchList({coinId}) {
   const handleClick = (e) => {
     e.preventDefault();
     console.log("Add to watchlist handle click ", coinId);
-    axios.post('http://localhost:8000/api/v1/users/add-to-watchlist', {
+    const url = import.meta.env.VITE_BASE_URL;
+    axios.post(`${url}/api/v1/users/add-to-watchlist`, {
       coinId
     }, {
       withCredentials: true
