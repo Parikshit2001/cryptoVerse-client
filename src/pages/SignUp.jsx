@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { server } from '../constants'
 
 function SignUp() {
   const [username, setUsername] = useState('')
@@ -10,14 +11,14 @@ function SignUp() {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    axios.post(`${'https://crypto-verse-server.vercel.app'}/api/v1/users/register`, {
+    axios.post(`${server}/api/v1/users/register`, {
       username,
       email,
       password
     })
     .then(response => {
       console.log("Response: ", response);
-      return axios.post(`${'https://crypto-verse-server.vercel.app'}/api/v1/users/login`, {
+      return axios.post(`${server}/api/v1/users/login`, {
         username,
         email: username,
         password

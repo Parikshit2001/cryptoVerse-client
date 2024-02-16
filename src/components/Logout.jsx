@@ -1,13 +1,14 @@
 import React from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { server } from '../constants'
 
 function Logout() {
   const navigate = useNavigate();
 
   const handleClick = (e) => {
     e.preventDefault();
-    axios.post('https://crypto-verse-server.vercel.app/api/v1/users/logout', {}, {
+    axios.post(`${server}/api/v1/users/logout`, {}, {
       withCredentials: true
     })
     .then(response => {

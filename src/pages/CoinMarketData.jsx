@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { AddToWatchList } from '../components';
 import { useSelector } from 'react-redux';
+import { server } from '../constants';
 
 function CoinMarketData() {
   const [marketData, setMarketData] = useState([]);
@@ -22,7 +23,7 @@ function CoinMarketData() {
   }, [currency])
 
   useEffect(() => {
-    axios.get(`${'https://crypto-verse-server.vercel.app'}/api/v1/users/watchlist`, {
+    axios.get(`${server}/api/v1/users/watchlist`, {
       withCredentials: true
     })
     .then(response => {
