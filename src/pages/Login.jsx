@@ -31,7 +31,6 @@ function Login() {
       withCredentials: true
     })
     .then(response => {
-      // console.log(response.data);
       navigate('/');
     })
     .catch(error => console.error("Error: ", error))

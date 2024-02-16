@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { server } from '../constants';
 
 function WatchListMarketData() {
   const [marketData, setMarketData] = useState([]);
@@ -22,7 +23,7 @@ function WatchListMarketData() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`${'https://crypto-verse-server.vercel.app'}/api/v1/users/watchlist`, {
+    axios.get(`${server}/api/v1/users/watchlist`, {
       withCredentials: true
     })
     .then(response => {
@@ -38,7 +39,7 @@ function WatchListMarketData() {
 
   const handleRemove = (coinId) => {
     console.log(coinId)
-    axios.post(`${'https://crypto-verse-server.vercel.app'}/api/v1/users/remove-from-watchlist`, {
+    axios.post(`${server}/api/v1/users/remove-from-watchlist`, {
       coinId
     }, {
       withCredentials: true
