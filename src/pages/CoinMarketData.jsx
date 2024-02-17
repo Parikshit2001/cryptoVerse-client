@@ -14,9 +14,10 @@ function CoinMarketData() {
 
   useEffect(() => {
     // const apiUrl = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}`;
-    const apiUrl = '/coinMarketData.json';
+    const apiUrl = `/coinMarketData${currency}.json`;
     axios.get(apiUrl)
     .then((response) => {
+      console.log(response.data)
       setMarketData(response.data);
     })
     .catch((error) => console.error("Error fetching coin market data: ", error))
@@ -43,20 +44,22 @@ function CoinMarketData() {
 
   return (
     <div className='flex flex-col justify-center items-center'>
-      <div className='flex flex-row flex-wrap justify-start'>
+      <div className='flex flex-row flex-wrap justify-center'>
         {marketData?.slice(page*15 - 15, page*15).map(data => {
           return <div
             key={data.id}
-            className='border my-2 ml-1 mr-1 sm:w-1/4 md:w-48'
+            className='border my-2 ml-1 mr-1 sm:w-1/4 md:w-1/6 h-auto flex flex-col justify-between items-center'
           >
-            <div onClick={() => handleClick(data.id)} className='flex flex-col hover:cursor-pointer hover:bg-black hover:text-white rounded bg-blue-200 justify-center items-center'>
-              <p className='text-3xl'>{data.id}</p>
-              <p><img src={data.image} /></p>
-              <p>{data.current_price} {currency.toUpperCase()}</p>
-              <p className={`${data.price_change_24h < 0 ? 'text-red-500' : 'text-green-500'}`}>{data.price_change_24h}</p>
-              <p className={`${data.price_change_percentage_24h < 0 ? 'text-red-500' : 'text-green-500'}`}>{data.price_change_percentage_24h}%</p>
+            <div onClick={() => handleClick(data.id)} className='flex flex-col hover:cursor-pointer hover:bg-black hover:text-white rounded bg-blue-200 justify-center items-start w-full'>
+              <p className='self-center'><img src={data.image} /></p>
+              <h2 className='text-4xl'>{data.id}</h2>
+              <h3> <span className='text-3xl'>{data.current_price}</span> {currency.toUpperCase()}</h3>
+              <p className={`mt-0.5 rounded-lg px-2 ${data.price_change_24h < 0 ? 'text-red-500' : 'text-green-500'}`}>{data.price_change_24h}</p>
+              <p className={`mt-0.5 rounded-lg px-2 ${data.price_change_percentage_24h < 0 ? 'text-red-500' : 'text-green-500'}`}>{data.price_change_percentage_24h}%</p>
             </div>
-            {!watchList.some(item => item === data.id) && <AddToWatchList coinId={data.id}></AddToWatchList>}
+            {watchList.some(item => item === data.id) 
+            ? <button className='bg-green-500 p-4 w-3/4 rounded-3xl'></button> 
+            : <AddToWatchList coinId={data.id}></AddToWatchList>}
           </div>
         })}
       </div>
